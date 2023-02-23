@@ -1,27 +1,13 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+import telegram
+import time
 
-# создаем объект драйвера Firefox
-driver = webdriver.Firefox()
+# укажите токен вашего бота в переменной bot_token
+bot_token = 'YOUR_BOT_TOKEN_HERE'
 
-# переходим на страницу для создания нового письма
-driver.get("https://mail.rambler.ru/compose")
+# создайте объект bot, используя указанный токен
+bot = telegram.Bot(token=bot_token)
 
-# находим первое поле для ввода и вводим в него адрес электронной почты
-to_field = driver.find_element_by_name("to")
-to_field.send_keys("dpopko1982@gmail.com")
-
-# находим второе поле для ввода и вводим в него текст
-subject_field = driver.find_element_by_name("subj")
-subject_field.send_keys("Hi")
-
-# находим третье поле для ввода и вводим в него текст
-body_field = driver.find_element_by_id("tinymce")
-body_field.send_keys("No")
-
-# находим кнопку "Отправить" и нажимаем на нее
-send_button = driver.find_element_by_xpath("//button[text()='Отправить']")
-send_button.click()
-
-# закрываем окно браузера
-driver.quit()
+# создайте бесконечный цикл, который будет отправлять сообщение "Мне скучно" каждую минуту
+while True:
+    bot.send_message(chat_id='CHAT_ID_HERE', text='Мне скучно')
+    time.sleep(60)  # задержка в 60 секунд
